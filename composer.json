@@ -1,0 +1,5 @@
+{
+    "name": "tuxudo/ms_defender",
+    "description": "Microsoft Defender module for munkireport.",
+    "license": "MIT"
+}

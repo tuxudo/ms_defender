@@ -1,0 +1,20 @@
+i18n_title: ms_defender.report_title
+not_null_column: engine_version
+table:
+    -
+        column: machine.computer_name
+        i18n_header: listing.computername
+        formatter: clientDetail
+        tab_link: ms_defender
+    -
+        column: reportdata.serial_number
+        i18n_header: serial
+    - {i18n_header: ms_defender.healthy, column: ms_defender.healthy, formatter: binaryYesNo}
+    - {i18n_header: ms_defender.engine_version, column: ms_defender.engine_version}
+    - {i18n_header: ms_defender.definitions_updated, column: ms_defender.definitions_updated, formatter: timestampToMoment}
+    - {i18n_header: ms_defender.definitions_version, column: ms_defender.definitions_version}
+    - {i18n_header: ms_defender.licensed, column: ms_defender.licensed, formatter: binaryYesNo}
+    - {i18n_header: ms_defender.real_time_protection_available_short, column: ms_defender.real_time_protection_available, formatter: binaryYesNo}
+    - {i18n_header: ms_defender.real_time_protection_enabled_short, column: ms_defender.real_time_protection_enabled, formatter: binaryYesNo}
+    - {i18n_header: ms_defender.cloud_automatic_sample_submission_short, column: ms_defender.cloud_automatic_sample_submission, formatter: binaryYesNo}
+    - {i18n_header: ms_defender.release_ring, column: ms_defender.release_ring}

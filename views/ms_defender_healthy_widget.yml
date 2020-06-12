@@ -1,0 +1,7 @@
+type: scrollbox
+widget_id: ms_defender-healthy-widget
+api_url: /module/ms_defender/get_healthy
+i18n_title: ms_defender.widget_healthy
+icon: fa-heartbeat
+listing_link: /show/listing/ms_defender/ms_defender
+search_key: healthy

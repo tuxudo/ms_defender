@@ -1,0 +1,15 @@
+client_tabs:
+    ms_defender:
+        view: ms_defender_tab
+        i18n: ms_defender.title
+listings:
+    ms_defender:
+        view: ms_defender_listing
+        i18n: ms_defender.title
+widgets:
+    ms_defender_healthy:
+        view: ms_defender_healthy_widget
+reports:
+    ms_defender:
+        view: ms_defender_report
+        i18n: ms_defender.report_title
