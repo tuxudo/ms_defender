@@ -31,7 +31,7 @@ $(document).on('appReady', function(){
 
                         // Format date
                         } else if((prop == "definitions_updated") && d[prop] > 0){
-                            var date = new Date(d[prop] * 1000);
+                            var date = new Date((d[prop] * 1));
                             rows = rows + '<tr><th>'+i18n.t('ms_defender.'+prop)+'</th><td><span title="'+moment(date).fromNow()+'">'+moment(date).format('llll')+'</span></td></tr>';
                             
                         // Format yes/no

@@ -1,4 +1,5 @@
 i18n_title: ms_defender.report_title
+js_link: module/ms_defender/js/ms_defender
 not_null_column: engine_version
 table:
     -
@@ -11,7 +12,7 @@ table:
         i18n_header: serial
     - {i18n_header: ms_defender.healthy, column: ms_defender.healthy, formatter: binaryYesNo}
     - {i18n_header: ms_defender.engine_version, column: ms_defender.engine_version}
-    - {i18n_header: ms_defender.definitions_updated, column: ms_defender.definitions_updated, formatter: timestampToMoment}
+    - {i18n_header: ms_defender.definitions_updated, column: ms_defender.definitions_updated, formatter: ms_defenderTimestampToMoment}
     - {i18n_header: ms_defender.definitions_version, column: ms_defender.definitions_version}
     - {i18n_header: ms_defender.licensed, column: ms_defender.licensed, formatter: binaryYesNo}
     - {i18n_header: ms_defender.real_time_protection_available_short, column: ms_defender.real_time_protection_available, formatter: binaryYesNo}
