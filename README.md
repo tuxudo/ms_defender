@@ -24,3 +24,6 @@ Table Schema
 * healthy - boolean - If defender reports back healthy
 * machine_guid - VARCHAR(255) - GUID of machine
 * org_id - VARCHAR(255) - Organisation's ID
+* real_time_protection_subsystem - VARCHAR(255) - What subsystem is used for real time protection
+* cloud_auto_sample_submission_consent - VARCHR(255) - Consent of automatic sample submission
+* app_version - VARCHAR(255) - Version of the app used

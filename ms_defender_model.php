@@ -24,6 +24,9 @@ class Ms_defender_model extends Eloquent
       'healthy',
       'machine_guid',
       'org_id',
+      'app_version',
+      'real_time_protection_subsystem',
+      'cloud_auto_sample_submission_consent',
     ];
 
     public $timestamps = false;

@@ -44,13 +44,21 @@ def get_mdatp_data():
         elif 'releaseRing                             : ' in item:
             out['release_ring'] = remove_all('"', remove_all('releaseRing                             : ', item).strip())
         elif 'versionEngine                           : ' in item:
-            out['engine_version'] = remove_all('"', remove_all('versionEngine                           : ', item).strip())
+            out['app_version'] = remove_all('"', remove_all('versionEngine                           : ', item).strip())
         elif 'edrMachineId                            : ' in item:
             out['erd_machine_id'] = remove_all('"', remove_all('edrMachineId                            : ', item).strip())
         elif 'machineGuid                             : ' in item:
             out['machine_guid'] = remove_all('"', remove_all('machineGuid                             : ', item).strip())
         elif 'orgId                                   : ' in item:
             out['org_id'] = remove_all('"', remove_all('orgId                                   : ', item).strip())
+        elif 'appVersion                              : ' in item:
+            out['app_version'] = remove_all('"', remove_all('appVersion                              : ', item).strip())
+        elif 'cloudAutomaticSampleSubmissionConsent   : ' in item:
+            out['cloud_auto_sample_submission_consent'] = remove_all('"', remove_all('cloudAutomaticSampleSubmissionConsent   : ', item).strip())
+        elif 'engineVersion                           : ' in item:
+            out['engine_version'] = remove_all('"', remove_all('engineVersion                           : ', item).strip())
+        elif 'realTimeProtectionSubsystem             : ' in item:
+            out['real_time_protection_subsystem'] = remove_all('"', remove_all('realTimeProtectionSubsystem             : ', item).strip())
     
     return out
 
