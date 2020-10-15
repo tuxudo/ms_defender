@@ -15,6 +15,17 @@ class MsDefenderMoreColumns extends Migration
             $table->renameColumn('engine_version', 'app_version');
         });
 
+        // Get list of existing indexes
+        $sm = $capsule::schema()->getConnection()->getDoctrineSchemaManager();
+        $indexesFound = $sm->listTableDetails('ms_defender');
+
+        // Drop old engine_version index
+        if ($indexesFound->hasIndex('ms_defender_engine_version_index')) {
+            $capsule::schema()->table('ms_defender', function (Blueprint $table) {
+                $table->dropIndex('ms_defender_engine_version_index');
+            });
+        }
+
         $capsule::schema()->table($this->tableName, function (Blueprint $table) {
             $table->string('real_time_protection_subsystem')->nullable();
             $table->string('cloud_auto_sample_submission_consent')->nullable();
@@ -24,6 +35,13 @@ class MsDefenderMoreColumns extends Migration
             $table->index('cloud_auto_sample_submission_consent');
             $table->index('engine_version');
         });
+
+        // Add index if it doesn't exist
+        if (! $indexesFound->hasIndex('ms_defender_app_version_index')) {
+            $capsule::schema()->table('ms_defender', function (Blueprint $table) {
+                $table->index('app_version');
+            });
+        }
     }
     
     public function down()
