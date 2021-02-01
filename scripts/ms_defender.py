@@ -6,6 +6,8 @@ import sys
 import plistlib
 import re
 import string
+import datetime
+import time
 
 
 def get_mdatp_data():
@@ -71,7 +73,8 @@ def get_mdatp_data():
         elif 'cloud_enabled     ' in item:
             out['cloud_enabled'] = to_bool(item.split(" : ")[1].strip())
         elif 'definitions_updated     ' in item:
-            out['definitions_updated'] = re.sub('[^0-9]','', item.split(" : ")[1].strip())
+            date_time_obj = datetime.datetime.strptime(item.split(" : ")[1].strip(), '%b %d, %Y at %I:%M:%S %p')
+            out['definitions_updated'] = int(time.mktime(date_time_obj.timetuple()))*1000
         elif 'definitions_version     ' in item:
             out['definitions_version'] = re.sub('[^0-9]','', item.split(" : ")[1].strip())
         elif 'edr_early_preview_enabled     ' in item:
@@ -120,7 +123,7 @@ def main():
 
     # Check if ms defender is installed
     if  not os.path.isfile('/usr/local/bin/mdatp'):
-        print "ERROR: Microsoft Defender is not installed"
+        print("ERROR: Microsoft Defender is not installed")
         exit(0)
 
     # Get information about Microsoft Defender    
