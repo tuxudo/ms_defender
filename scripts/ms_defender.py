@@ -6,11 +6,13 @@ import sys
 import plistlib
 import re
 import string
+import datetime
+import time
 
 
 def get_mdatp_data():
 
-    cmd = ['/usr/local/bin/mdatp', '--health']
+    cmd = ['/usr/local/bin/mdatp', 'health']
     proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -59,7 +61,46 @@ def get_mdatp_data():
             out['engine_version'] = remove_all('"', item.split(" : ")[1].strip())
         elif 'realTimeProtectionSubsystem     ' in item:
             out['real_time_protection_subsystem'] = remove_all('"', item.split(" : ")[1].strip())
-
+        # Below are definitions used by Defender 101.19.48+
+        elif 'app_version     ' in item:
+            out['app_version'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'automatic_definition_update_enabled     ' in item:
+            out['automatic_definition_update_enabled'] = to_bool(item.split(" : ")[1].strip())
+        elif 'cloud_automatic_sample_submission_consent   ' in item:
+            out['cloud_auto_sample_submission_consent'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'cloud_diagnostic_enabled     ' in item:
+            out['cloud_diagnostic_enabled'] = to_bool(item.split(" : ")[1].strip())
+        elif 'cloud_enabled     ' in item:
+            out['cloud_enabled'] = to_bool(item.split(" : ")[1].strip())
+        elif 'definitions_updated     ' in item:
+            date_time_obj = datetime.datetime.strptime(item.split(" : ")[1].strip(), '%b %d, %Y at %I:%M:%S %p')
+            out['definitions_updated'] = int(time.mktime(date_time_obj.timetuple()))*1000
+        elif 'definitions_version     ' in item:
+            out['definitions_version'] = re.sub('[^0-9]','', item.split(" : ")[1].strip())
+        elif 'edr_early_preview_enabled     ' in item:
+            out['erd_early_preview_enabled'] = to_bool(item.split(" : ")[1].strip())
+        elif 'edr_machine_id     ' in item:
+            out['erd_machine_id'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'engine_version      ' in item:
+            out['engine_version'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'healthy     ' in item:
+            out['healthy'] = to_bool(item.split(" : ")[1].strip())
+        elif 'licensed     ' in item:
+            out['licensed'] = to_bool(item.split(" : ")[1].strip())
+        elif 'log_level     ' in item:
+            out['log_level'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'machine_guid     ' in item:
+            out['machine_guid'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'org_id     ' in item:
+            out['org_id'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'real_time_protection_available     ' in item:
+            out['real_time_protection_available'] = to_bool(item.split(" : ")[1].strip())
+        elif 'real_time_protection_enabled     ' in item:
+            out['real_time_protection_enabled'] = to_bool(item.split(" : ")[1].strip())
+        elif 'real_time_protection_subsystem     ' in item:
+            out['real_time_protection_subsystem'] = remove_all('"', item.split(" : ")[1].strip())
+        elif 'release_ring     ' in item:
+            out['release_ring'] = remove_all('"', item.split(" : ")[1].strip())
     return out
 
 
@@ -82,7 +123,7 @@ def main():
 
     # Check if ms defender is installed
     if  not os.path.isfile('/usr/local/bin/mdatp'):
-        print "ERROR: Microsoft Defender is not installed"
+        print("ERROR: Microsoft Defender is not installed")
         exit(0)
 
     # Get information about Microsoft Defender    
