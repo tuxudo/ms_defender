@@ -20,6 +20,7 @@
     "real_time_protection_subsystem": "Real Time Protection Subsystem",
     "release_ring": "Release Ring",
     "healthy": "Healthy",
+    "unhealthy": "Unhealthy",
     "org_id": "Organization ID",
     "machine_guid": "Machine GUID",
     "erd_machine_id": "ERD Machine ID",
