@@ -1,0 +1,13 @@
+type: button
+widget_id: ms_defender-healthy-widget
+api_url: /module/ms_defender/get_health_stats
+i18n_title: ms_defender.widget_healthy
+icon: fa-heartbeat
+listing_link: /show/listing/ms_defender/ms_defender
+buttons:
+  - label: unhealthy
+    i18n_label: ms_defender.unhealthy
+    class: btn-danger 
+  - label: healthy
+    i18n_label: ms_defender.healthy
+    class: btn-success

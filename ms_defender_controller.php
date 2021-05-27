@@ -38,11 +38,12 @@ class Ms_defender_controller extends Module_controller
     public function get_health_stats()
     {
         jsonView(
-            $out = Ms_defender_model::selectRaw('COUNT(CASE WHEN healthy = 1 THEN 1 END) AS healthy,
-                        COUNT(CASE WHEN healthy = 0 THEN 1 END) AS unhealthy')
+            Ms_defender_model::selectRaw("COUNT(CASE WHEN `healthy` = '1' THEN 1 END) AS 'healthy'")
+                ->selectRaw("COUNT(CASE WHEN `healthy` = '0' THEN 1 END) AS 'unhealthy'")
                 ->filter()
-                ->get()
-            );
+                ->first()
+                ->toLabelCount()
+        );
     }
 
     /**
