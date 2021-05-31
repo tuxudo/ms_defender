@@ -33,6 +33,20 @@ class Ms_defender_controller extends Module_controller
     }
 
     /**
+     * Get ms_defender health stats for new widget
+    **/
+    public function get_health_stats()
+    {
+        jsonView(
+            Ms_defender_model::selectRaw("COUNT(CASE WHEN `healthy` = '1' THEN 1 END) AS 'healthy'")
+                ->selectRaw("COUNT(CASE WHEN `healthy` = '0' THEN 1 END) AS 'unhealthy'")
+                ->filter()
+                ->first()
+                ->toLabelCount()
+        );
+    }
+
+    /**
      * Get ms_defender information for serial_number
      *
      * @param string $serial serial number
