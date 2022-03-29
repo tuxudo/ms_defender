@@ -1,4 +1,4 @@
-#!/usr/local/munkireport/munkireport-python2
+#!/usr/local/munki/munki-python
 
 import os
 import subprocess
@@ -20,7 +20,7 @@ def get_mdatp_data():
 
     out = {}
 
-    for item in output.split('\n'):
+    for item in output.decode().split('\n'):
         if 'cloudAutomaticSampleSubmission     ' in item:
             out['cloud_automatic_sample_submission'] = to_bool(item.split(" : ")[1].strip())
         elif 'cloudDiagnosticEnabled     ' in item:
@@ -132,7 +132,11 @@ def main():
     # Write results to cache
     cachedir = '%s/cache' % os.path.dirname(os.path.realpath(__file__))
     output_plist = os.path.join(cachedir, 'ms_defender.plist')
-    plistlib.writePlist(result, output_plist)
+    try:
+        plistlib.writePlist(result, output_plist)
+    except:
+        with open(output_plist, 'wb') as fp:
+            plistlib.dump(result, fp, fmt=plistlib.FMT_XML)
 #    print plistlib.writePlistToString(result)
 
 if __name__ == "__main__":
