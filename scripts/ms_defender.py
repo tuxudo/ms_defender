@@ -110,13 +110,12 @@ def to_bool(s):
     else:
         return 0
 
-def remove_all(substr, str):
-    index = 0
-    length = len(substr)
-    while string.find(str, substr) != -1:
-        index = string.find(str, substr)
-        str = str[0:index] + str[index+length:]
-    return str
+def remove_all(substr, string):
+    try:
+        removed = string.replace(substr, "")
+    except:
+        removed = string.replace(substr.encode("utf-8"), "".encode())
+    return removed
 
 def main():
     """Main"""
