@@ -7,7 +7,7 @@
 $(document).on('appReady', function(){
 	$.getJSON(appUrl + '/module/ms_defender/get_data/' + serialNumber, function(data){
         // Check if we have data
-        if(!data[0].engine_version && data[0].engine_version !== null && data[0].engine_version !== 0){
+        if(data.length == 0 || (!data[0].engine_version && data[0].engine_version !== null && data[0].engine_version !== 0)){
             $('#ms_defender-msg').text(i18n.t('no_data'));
             $('#ms_defender-header').removeClass('hide');
 
